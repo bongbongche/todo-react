@@ -3,25 +3,20 @@ import styled from "styled-components";
 import ToDoItem from "./ToDoItem";
 import FinishedItem from "./FinishedItem";
 
-class TaskList extends React.Component {
-  render() {
-    return (
-      <Container>
-        <ListContainer>
-          <h3>To Do</h3>
-          <ItemList>
-            <ToDoItem />
-          </ItemList>
-        </ListContainer>
-        <ListContainer>
-          <h3>Finished</h3>
-          <ItemList>
-            <FinishedItem />
-          </ItemList>
-        </ListContainer>
-      </Container>
-    );
-  }
+function TaskList(props) {
+  const { toDoList } = props;
+  return (
+    <Container>
+      <ListContainer>
+        <h3>To Do</h3>
+        <ToDoItem toDoList={toDoList} />
+      </ListContainer>
+      <ListContainer>
+        <h3>Finished</h3>
+        <FinishedItem />
+      </ListContainer>
+    </Container>
+  );
 }
 
 const Container = styled.div`
@@ -43,7 +38,5 @@ const ListContainer = styled.div`
     margin-right: 30px;
   }
 `;
-
-const ItemList = styled.ul``;
 
 export default TaskList;
