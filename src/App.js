@@ -4,21 +4,33 @@ import TaskList from "./components/TaskList";
 import styled, { createGlobalStyle } from "styled-components";
 
 class App extends React.Component {
+  state = {
+    toDos: [],
+  };
+
   handleSubmit(e) {
+    const { toDos } = this.state;
     e.preventDefault();
     const toDoInput = document.querySelector("input");
     const toDoText = toDoInput.value;
-    console.log(toDoText);
     toDoInput.value = "";
+    this.setState({
+      toDos: toDos.concat({ id: Date.now(), text: toDoText }),
+    });
+  }
+
+  componentDidUpdate() {
+    console.log(this.state);
   }
 
   render() {
+    const { toDos } = this.state;
     return (
       <Fragment>
         <GlobalStyle />
         <ToDoContainer>
           <WriteToDo onSubmit={(e) => this.handleSubmit(e)} />
-          <TaskList />
+          <TaskList toDoList={toDos} />
         </ToDoContainer>
       </Fragment>
     );
