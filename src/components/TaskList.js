@@ -3,13 +3,13 @@ import styled from "styled-components";
 import ToDoItem from "./ToDoItem";
 import FinishedItem from "./FinishedItem";
 
-function TaskList(props) {
+const TaskList = (props) => {
   const { toDoList } = props;
   return (
     <Container>
       <ListContainer>
         <h3>To Do</h3>
-        <ToDoItem toDoList={toDoList} />
+        <ToDoItem toDoList={toDoList} onClick={(e) => props.onClick(e)} />
       </ListContainer>
       <ListContainer>
         <h3>Finished</h3>
@@ -17,7 +17,7 @@ function TaskList(props) {
       </ListContainer>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   width: 100%;

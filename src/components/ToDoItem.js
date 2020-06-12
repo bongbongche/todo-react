@@ -6,10 +6,15 @@ const ToDoItem = (props) => {
   const list = toDoList.map((item) => (
     <Li key={item.id} id={item.id}>
       {item.text}
-      <button>Del</button>
+      <button
+        onClick={(e) => {
+          props.onClick(e);
+        }}
+      >
+        Del
+      </button>
     </Li>
   ));
-  console.log(list.length !== 0);
   return <ul>{list}</ul>;
 };
 

@@ -19,9 +19,19 @@ class App extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-    console.log(this.state);
+  handleDelete(e) {
+    const {
+      target: {
+        parentNode: { id },
+      },
+    } = e;
+    const { toDos } = this.state;
+    this.setState({
+      toDos: toDos.filter((toDo) => toDo.id !== parseInt(id, 10)),
+    });
   }
+
+  componentDidUpdate() {}
 
   render() {
     const { toDos } = this.state;
@@ -30,7 +40,7 @@ class App extends React.Component {
         <GlobalStyle />
         <ToDoContainer>
           <WriteToDo onSubmit={(e) => this.handleSubmit(e)} />
-          <TaskList toDoList={toDos} />
+          <TaskList toDoList={toDos} onClick={(e) => this.handleDelete(e)} />
         </ToDoContainer>
       </Fragment>
     );
