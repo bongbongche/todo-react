@@ -3,18 +3,21 @@ import styled from "styled-components";
 
 const ToDoItem = (props) => {
   const { toDoList } = props;
-  const list = toDoList.map((item) => (
-    <Li key={item.id} id={item.id}>
-      {item.text}
-      <button
-        onClick={(e) => {
-          props.onClick(e);
-        }}
-      >
-        Del
-      </button>
-    </Li>
-  ));
+  const list = toDoList
+    .filter((item) => !item.finished)
+    .map((item) => (
+      <Li key={item.id} id={item.id}>
+        {item.text}
+        <button
+          onClick={(e) => {
+            props.handleFinished(e);
+          }}
+        >
+          Fin
+        </button>
+        <button onClick={(e) => props.handleDelete(e)}>Del</button>
+      </Li>
+    ));
   return <ul>{list}</ul>;
 };
 

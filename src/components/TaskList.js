@@ -9,11 +9,19 @@ const TaskList = (props) => {
     <Container>
       <ListContainer>
         <h3>To Do</h3>
-        <ToDoItem toDoList={toDoList} onClick={(e) => props.onClick(e)} />
+        <ToDoItem
+          toDoList={toDoList}
+          handleDelete={(e) => props.handleDelete(e)}
+          handleFinished={(e) => props.handleFinished(e)}
+        />
       </ListContainer>
       <ListContainer>
         <h3>Finished</h3>
-        <FinishedItem />
+        <FinishedItem
+          toDoList={toDoList}
+          handleDelete={(e) => props.handleDelete(e)}
+          handleBack={(e) => props.handleBack(e)}
+        />
       </ListContainer>
     </Container>
   );
@@ -28,7 +36,6 @@ const Container = styled.div`
 
 const ListContainer = styled.div`
   width: 200px;
-  border: 1px solid grey;
   display: flex;
   flex-direction: column;
   h3 {

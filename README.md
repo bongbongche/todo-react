@@ -1,6 +1,10 @@
 # To Do List with React
 
 ## features
-- [ ] Make Todo list
-- [ ] Check finish
+- [x] Make Todo list
+- [x] Check finish
 - [ ] Save in local storage
+
+## memo
+
+move todo-list to finished-list

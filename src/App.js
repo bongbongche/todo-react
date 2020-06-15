@@ -15,7 +15,7 @@ class App extends React.Component {
     const toDoText = toDoInput.value;
     toDoInput.value = "";
     this.setState({
-      toDos: toDos.concat({ id: Date.now(), text: toDoText }),
+      toDos: toDos.concat({ id: Date.now(), text: toDoText, finished: false }),
     });
   }
 
@@ -31,6 +31,42 @@ class App extends React.Component {
     });
   }
 
+  handleFinished(e) {
+    const {
+      target: {
+        parentNode: { id },
+      },
+    } = e;
+    const { toDos } = this.state;
+    const elementIndex = toDos.findIndex(
+      (toDo) => toDo.id === parseInt(id, 10)
+    );
+    let newToDos = [...toDos];
+    newToDos[elementIndex].finished = true;
+    newToDos[elementIndex].finishedTime = Date.now();
+    this.setState({
+      toDos: newToDos,
+    });
+  }
+
+  handleBack(e) {
+    const {
+      target: {
+        parentNode: { id },
+      },
+    } = e;
+    const { toDos } = this.state;
+    const elementIndex = toDos.findIndex(
+      (toDo) => toDo.id === parseInt(id, 10)
+    );
+    let newToDos = [...toDos];
+    newToDos[elementIndex].finished = false;
+    newToDos[elementIndex].finishedTime = null;
+    this.setState({
+      toDos: newToDos,
+    });
+  }
+
   componentDidUpdate() {}
 
   render() {
@@ -40,7 +76,12 @@ class App extends React.Component {
         <GlobalStyle />
         <ToDoContainer>
           <WriteToDo onSubmit={(e) => this.handleSubmit(e)} />
-          <TaskList toDoList={toDos} onClick={(e) => this.handleDelete(e)} />
+          <TaskList
+            toDoList={toDos}
+            handleDelete={(e) => this.handleDelete(e)}
+            handleFinished={(e) => this.handleFinished(e)}
+            handleBack={(e) => this.handleBack(e)}
+          />
         </ToDoContainer>
       </Fragment>
     );
