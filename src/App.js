@@ -67,7 +67,19 @@ class App extends React.Component {
     });
   }
 
-  componentDidUpdate() {}
+  componentDidMount() {
+    const { toDos } = this.state;
+    const loadedTodos = localStorage.getItem("TODOS");
+    const parsedLoadedTodos = JSON.parse(loadedTodos);
+    this.setState({
+      toDos: parsedLoadedTodos.concat(...toDos),
+    });
+  }
+
+  componentDidUpdate() {
+    const { toDos } = this.state;
+    localStorage.setItem("TODOS", JSON.stringify(toDos));
+  }
 
   render() {
     const { toDos } = this.state;
